@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Validator;
 use App\Shop\Entity\Merchandise;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class MerchandiseController extends Controller
