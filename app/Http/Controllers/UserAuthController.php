@@ -36,10 +36,12 @@ class UserAuthController extends Controller
             $input['password'] = Hash::make($input['password']);
             User::create($input);
 
-            Mail::send('email.RegisterEmailNotification', ['nickname' => $input['name']], function ($message) use ($input) {
-                $message->to($input['email']);
-                $message->from('thesirius0927@gmail.com');
-                $message->subject('恭喜註冊成功');
+            Mail::send('email.RegisterEmailNotification', 
+            ['nickname' => $input['name']], 
+            function ($message) use ($input) {
+                $message->to($input['email'], $input['name'])
+                ->from('thesirius0927@gmail.com')
+                ->subject('恭喜註冊成功');
             });
         }
     }
