@@ -15,9 +15,7 @@ class Merchandise extends Model
     protected $fillable = [
         'status',
         'name',
-        'name_en',
         'introduction',
-        'introduction_en',
         'photo',
         'price',
         'remain_count',
