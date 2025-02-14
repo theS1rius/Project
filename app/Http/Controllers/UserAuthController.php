@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Shop\Entity\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -91,17 +90,34 @@ class UserAuthController extends Controller
         return view('user.auth.login');
     }
 
-    public function LoginProcess(Request $request)
+    public function LoginProcess()
     {
-        $request->validate([
-            'account' => 'required|string',
-            'password' => 'required|string',
+        $input = request()->all();
+
+        $rules = [
+            'account' => ['required','alpha_num'],
+            'password' => ['required'],
+        ];
+
+        $validator = Validator::make($input, $rules, [
+            'account.required' => '請填寫帳號',
+            'account.alpha_num' => '帳號只能是英文和數字',
+            'password.required' => '請填寫密碼',
         ]);
 
-        if (Auth::attempt($request->only('account', 'password'))) {
-            return redirect()->route('Dashboard');
+        if ($validator->fails()) {
+            return redirect('user/auth/login')
+            ->withErrors($validator)
+            ->withInput();
         }
-        return back()->withErrors(['account' => '錯誤']);
+
+        if (Auth::attempt(['account' => $input['account'], 'password' => $input['password']])) {
+            return redirect()->intended('user/auth/dashboard');
+        } else {
+            return redirect('user/auth/login')
+            ->withErrors(['msg' => '登入失敗，帳號或密碼錯誤！'])
+            ->withInput();
+        }
     }
 
     public function Dashboard()
