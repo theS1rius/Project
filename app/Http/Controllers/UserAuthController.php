@@ -72,6 +72,8 @@ class UserAuthController extends Controller
         if ($User) {
             $this->SendRegisterMail($input);
         }
+
+        return redirect('user/auth/login');
     }
 
     public function SendRegisterMail($input){
