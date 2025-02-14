@@ -77,7 +77,7 @@ class UserAuthController extends Controller
 
     public function SendRegisterMail($input){
         Mail::send('email.RegisterEmailNotification',
-        ['nickname' => $input['name']],
+        ['name' => $input['name']],
         function ($message) use ($input) {
         $message->to($input['email'], $input['name'])
         ->from('thesirius0927@gmail.com')

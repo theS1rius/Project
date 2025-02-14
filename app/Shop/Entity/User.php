@@ -3,6 +3,7 @@
 namespace App\Shop\Entity;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\GoogleUser;
 
 class User extends Model
 {
@@ -17,4 +18,9 @@ class User extends Model
         'email',
         'type',
     ];
+
+    public function googleUser()
+    {
+        return $this->hasOne(GoogleUser::class, 'email', 'email');
+    }
 }

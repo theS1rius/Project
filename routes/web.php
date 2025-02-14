@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\MerchandiseController;
 use App\Http\Controllers\TransactionController;
 use Ycs77\NewebPay\Facades\NewebPay;
@@ -14,12 +15,16 @@ Route::get('/', [HomeController::class, 'indexPage'])->name('indexPage');
 #使用者
 Route::group(['prefix' => 'user'], function () {
     Route::group(['prefix' => 'auth'], function () {
+            // 使用者驗證
             Route::get('/login', [UserAuthController::class, 'ShowLoginForm'])->name('ShowLoginForm');
             Route::post('/login', [UserAuthController::class, 'LoginProcess'])->name('LoginProcess');
             Route::get('/register', [UserAuthController::class, 'ShowRegisterForm'])->name('ShowRegisterForm');
             Route::post('/register', [UserAuthController::class, 'RegisterProcess'])->name('RegisterProcess');
             Route::get('/dashboard', [UserAuthController::class, 'Dashboard'])->name('Dashboard');
             Route::post('/logout', [UserAuthController::class, 'Logout'])->name('Logout');
+            // Google 登入
+            Route::get('/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
+            Route::get('/google/callback', [GoogleController::class, 'handleGoogleCallback']);
     });
 });
 

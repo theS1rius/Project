@@ -11,6 +11,7 @@
         <main>
             <h1>請登入會員</h1>
             <form action="{{ route('LoginProcess') }}" method="post">
+                {!! csrf_field() !!}
                 <div>
                     <input type="text" name="account" placeholder="請輸入帳號" required>
                     <br>
@@ -19,6 +20,7 @@
                     <button type="submit">登入</button>
                 </div>
             </form>
+            <a href="{{ route('google.login') }}">使用Google登入</a>
             <form action="{{ route('ShowRegisterForm') }}" method="get">
                 <div>
                     <button type="submit">註冊</button>
