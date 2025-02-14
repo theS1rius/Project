@@ -20,81 +20,69 @@ class UserAuthController extends Controller
     public function RegisterProcess()
     {
         $input = request()->all();
-        print_r($input);
-        
-        if ($input['name'] == '') {
-            print('暱稱不得為空');
-            return redirect('/user/auth/register')
-                ->withErrors(['暱稱不得為空', '請重新輸入'])
-                ->withInput();
-        } else if ($input['password'] == '') {
-            print('密碼不得為空');
-            return redirect('/user/auth/register')
-                ->withErrors(['密碼不得為空', '請重新輸入'])
-                ->withInput();
-        } else {
-            $input['password'] = Hash::make($input['password']);
-            User::create($input);
 
-            Mail::send('email.RegisterEmailNotification', 
-            ['nickname' => $input['name']], 
-            function ($message) use ($input) {
-                $message->to($input['email'], $input['name'])
-                ->from('thesirius0927@gmail.com')
-                ->subject('恭喜註冊成功');
-            });
+        $rules = [
+            'name' => ['required','min:2','max:10'],
+            'account' => ['required','alpha_num','min:2','max:20'],
+            'password' => ['required','min:6','max:20','same:password_confirmation'],
+            'password_confirmation' => ['required','min:6','max:20'],
+            'email' => ['required','email','max:100'],
+        ];
+
+        $validator = Validator::make($input, $rules, [
+            'name.required' => '請填寫名稱',
+            'name.min' => '名稱最少2個字',
+            'name.max' => '名稱最多10個字',
+            'account.required' => '請填寫帳號',
+            'account.alpha_num' => '帳號只能是英文和數字',
+            'account.min' => '帳號最少2個字',
+            'account.max' => '帳號最多20個字',
+            'password.required' => '請填寫密碼',
+            'password.min' => '密碼最少6個字',
+            'password.max' => '密碼最多20個字',
+            'password.same' => '確認密碼與密碼不相同',
+            'password_confirmation.required' => '請填寫確認密碼',
+            'password_confirmation.min' => '確認密碼最少6個字',
+            'password_confirmation.max' => '確認密碼最多20個字',
+            'email.required' => '請填寫電子郵件',
+            'email.email' => '電子郵件格式錯誤',
+            'email.max' => '電子郵件最多100個字',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('user/auth/register')
+            ->withErrors($validator)
+            ->withInput();
+        }
+
+        if (User::where('account', $input['account'])->exists()) {
+            return redirect('user/auth/register')
+            ->withErrors(['account' => '帳號已被使用'])
+            ->withInput();
+        } else if (User::where('email', $input['email'])->exists()) {
+            return redirect('user/auth/register')
+            ->withErrors(['email' => '電子郵件已被使用'])
+            ->withInput();
+        }
+
+        $input['password'] = Hash::make($input['password']);
+
+        $User = User::create($input);
+
+        if ($User) {
+            $this->SendRegisterMail($input);
         }
     }
-    //     $input = request()->all();
 
-    //     $rules = [
-    //         'name' => ['required','min:2','max:10'],
-    //         'account' => ['required','alpha_num','min:2','max:20'],
-    //         'password' => ['required','min:6','max:20','same:password_confirmation'],
-    //         'password_confirmation' => ['required','min:6','max:20'],
-    //         'email' => ['required','email','max:100'],
-    //     ];
-
-    //     $validator = Validator::make($input, $rules, [
-    //         'nickname.required' => '請填寫 :attribute',
-    //         'nickname.max' => ':attribute 不得超過30字元',
-    //         'password.required' => '請填寫 :attribute',
-    //         'password.min' => ':attribute 不得低於6字元',
-    //         'password.max' => ':attribute 不得超過20字元',
-    //         'password.same' => ':attribute 與 確認密碼 不相同',
-    //         'password_confirmation.required' => '請填寫 :attribute',
-    //         'password_confirmation.min' => ':attribute 不得低於6字元',
-    //         'password_confirmation.max' => ':attribute 不得超過20字元',
-    //         'email.required' => '請填寫 :attribute',
-    //         'email.email' => '請填寫正確的 :attribute 格式',
-    //         'email.max' => ':attribute 不得超過100字元',
-    //     ], [
-    //         'nickname' => '暱稱',
-    //         'password' => '密碼',
-    //         'password_confirmation' => '確認密碼',
-    //         'email' => '電子郵件',
-    //     ]);
-    //     if ($validator->fails()) {
-    //         return redirect('user/auth/register')
-    //         ->withErrors($validator)
-    //         ->withInput();
-    //     }
-
-    //     $input['password'] = Hash::make($input['password']);
-
-    //     $Users = User::create($input);
-
-    //     $mail_binding = [ 'nickname' => $input['nickname'] ];
-
-    //     Mail::send('email.RegisterEmailNotification', $mail_binding, function ($mail) use ($input) {
-    //         $mail->to($input['email']);
-
-    //         $mail->from('thesirius0927@gmail.com'); //寄件者
-    //         $mail->subject('恭喜註冊成功');
-    //     });
-
-    //     return view('user.auth.login');
-    // }
+    public function SendRegisterMail($input){
+        Mail::send('email.RegisterEmailNotification',
+        ['nickname' => $input['name']],
+        function ($message) use ($input) {
+        $message->to($input['email'], $input['name'])
+        ->from('thesirius0927@gmail.com')
+        ->subject('恭喜註冊成功');
+        });
+    }
 
     public function ShowLoginForm()
     {
