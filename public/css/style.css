@@ -1,0 +1,308 @@
+body{
+    font-family: "微軟正黑體",sans-serif;
+    overflow-x: hidden;
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+.p-10{
+    padding: 3rem;
+}
+
+
+img,
+iframe{
+    width: 100%;
+}
+
+h1, img {
+    margin: 0;
+    padding: 0;
+}
+
+.text-left {
+    text-align: left;
+}
+.text-right {
+    text-align: right;
+}
+.text-justify{
+    text-align: justify;
+}
+/* 色票 */
+
+.text-dark{
+    color: #202020;
+}
+
+.text-red{
+    color: red;
+}
+
+.text-plum-Brown{
+    color: #845A6D;
+}
+
+.text-plum-dark{
+    color: #3E1929;
+}
+
+.text-grey{
+    color: #cccc;
+}
+
+.text-light{
+    color: #fafafa ;
+}
+
+.text-plum{
+    color: #D1CCDC;
+}
+
+.bg-plum-Brown{
+    background-color: #715b65;
+}
+.bg-red{
+    background-color: #ed5768;
+}
+
+
+.bg-grey{
+    background-color: #DCE0D9;
+}
+
+.bg-white{
+    background-color: #FFFFFF;
+}
+.bg-plum-light{
+    background-color: #fff7fb;
+}
+.bg-dark{
+    background-color: #5f196b;
+}
+.bg-transparent{
+    background-color: transparent;
+}
+
+
+.border-dark{
+    border-color: #202020 !important;   
+}
+.btn-plum{
+    background-color:  #DCE0D9;
+}
+
+.btn-transparent{
+    background-color: transparent;
+}
+
+.border {
+    border-width: 1px;
+
+}
+
+.border-red-60{
+    border-color: red !important;
+}
+.top-120 {
+    top: 120px !important;
+}
+
+/* 搜尋logo */
+
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: #f0ebe4; /* 淡色背景 */
+    padding: 3px 3px;
+    border-radius: 50px; /* 圓角，形成橢圓效果 */
+    width: fit-content;
+}
+
+/* 導覽列顏色字體 */
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+    color: #D1CCDC;
+}
+
+
+/* img的logo */
+.logo-img{
+    width:100px;
+    background-color: none;
+}
+
+/* 折價卷 */
+#discount-coupon-1{
+    width: 900px;
+    margin-bottom: 2rem;
+}
+
+#discount-coupon-2{
+    width: 900px;
+}
+
+/* 熱門商品價格 */
+#hot-product .card-text::before {
+    content: "$" !important;
+    padding-right: 0.3rem !important;
+}
+
+.navbar-nav {
+    display: flex;
+    justify-content: center;
+    align-items: normal;
+}
+
+
+.navbar-collapse {
+    flex-grow: 0;
+}
+
+#new-products .item{
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+
+/* 最新商品 */
+.owl-carousel .owl-nav.disabled {
+    display: flex;
+    
+}
+
+/* .owl-carousel .owl-dots.disabled{
+    display: block;
+} */
+
+.owl-nav {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    align-content:center;
+    justify-content: space-between;
+    color: #FFFFFF;
+    font-size: 56px;
+}
+
+
+
+
+.border-line{
+    border-top: solid #202020;
+    margin: 20px 0;
+    width: 100%;
+}
+
+#row-footer .col:nth-of-type(2) ul li a.nav-link {
+   padding: 0;
+  }
+
+  #row-footer .col:nth-of-type(2) ul .navbar-nav {
+    display: block; 
+   }
+
+ .bg-img {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center ;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#news-letter .bg-img{
+    background-attachment: fixed;
+}
+#news-letter {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+
+
+.card-body span::before{
+    content:"$";
+    /* padding-right: 0.3rem; */
+}
+
+
+
+#row-footer .col{
+    padding-left: 1.5em;
+    padding-right: 1.5rem;
+
+}
+/* .border{
+    border-bottom: 2px solid #202020;
+} */
+
+/* .text-nowrap{
+    
+} */
+
+/* 此為購物車陰影 */
+.shadow-lg{
+    box-shadow: 0 0 2;
+}
+
+.form-select {
+    width: 40%;
+}
+.text-base {
+    font-size: 2rem;
+    line-height: 1.5rem;
+}
+.rounded-lg {
+    border-radius: .5rem;
+}
+
+
+.card-body .totle-money::before{
+    content: "" !important;
+}
+
+.form-control {
+    border: 2px solid #202020;
+}
+.form-select {
+    width: 80%;
+}
+
+#for-search{
+    font-size: 14px;
+    padding-left: 1rem;
+}
+
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#for-search {
+    width: 0; /* 預設寬度為 0，隱藏 */
+    opacity: 0; /* 透明度設為 0 */
+    padding: 0;
+    border: none;
+    background: transparent;
+    transition: width 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+}
+
+.search-button:hover #for-search {
+    width: 200px; /* 滑鼠移入時展開輸入框 */
+    opacity: 1;
+    padding: 5px 10px; /* 添加 padding 讓輸入框更自然 */
+    border: 1px solid #ccc; /* 增加邊框讓使用者感覺輸入框出現 */
+    background: white; /* 讓輸入框明顯 */
+    outline: none;
+}

@@ -3,17 +3,13 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" href="/images/favicon.ico">
+        @include('layouts.head')
 
-        <title>官網</title>
+        <title>官網 | 首頁</title>
     </head>
     <body>
-        <main>
-            <h1>歡迎<?php $name ?>，這裡是首頁</h1>
-
-            <form action="{{ route('ShowLoginForm') }}" method="get">
-                <button type="submit">前往登入</button>
-            </form>
+        @include('layouts.header')
+        {{-- <main>
             <div class="row row-cols-1 row-cols-md-3 g-4">
             @foreach($Merchandises as $Merchandise)
                 <div class="col">
@@ -28,6 +24,11 @@
             @endforeach
             </div>
             {{ $Merchandises->links("vendor.pagination.bootstrap-5") }}
+        </main> --}}
+        <main>
         </main>
+        @include('layouts.loginform')
+        @include('layouts.footer')
+        @include('layouts.script')
     </body>
 </html>

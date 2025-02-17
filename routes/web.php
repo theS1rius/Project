@@ -16,24 +16,21 @@ Route::get('/', [HomeController::class, 'indexPage'])->name('indexPage');
 Route::group(['prefix' => 'user'], function () {
     Route::group(['prefix' => 'auth'], function () {
             // 使用者驗證
-            Route::get('/login', [UserAuthController::class, 'ShowLoginForm'])->name('ShowLoginForm');
             Route::post('/login', [UserAuthController::class, 'LoginProcess'])->name('LoginProcess');
             Route::get('/register', [UserAuthController::class, 'ShowRegisterForm'])->name('ShowRegisterForm');
             Route::post('/register', [UserAuthController::class, 'RegisterProcess'])->name('RegisterProcess');
             Route::get('/dashboard', [UserAuthController::class, 'Dashboard'])->name('Dashboard');
-            Route::post('/logout', [UserAuthController::class, 'Logout'])->name('Logout');
+            Route::get('/logout', [UserAuthController::class, 'Logout'])->name('Logout');
             // Google 登入
-            Route::get('/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
-            Route::get('/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+            // Route::get('/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
+            // Route::get('/google/callback', [GoogleController::class, 'handleGoogleCallback']);
     });
 });
 
 #商品
 Route::group(['prefix' => 'merchandise'], function () {
     Route::get('/', [MerchandiseController::class, 'MerchandiseListPage'])->name('MerchandiseListPage');
-    Route::post('/',function(){
-        return view('merchandise');
-    });
+    Route::post('/',function(){ return view('merchandise'); });
     Route::get('/create', [MerchandiseController::class, 'MerchandiseCreateProcess'])->name('MerchandiseCreateProcess');
     Route::get('/manage', [MerchandiseController::class, 'MerchandiseManageListPage'])->name('MerchandiseManageListPage');
     Route::group(['prefix' => '{merchandise_id}'], function () {

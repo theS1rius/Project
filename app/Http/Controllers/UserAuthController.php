@@ -85,11 +85,6 @@ class UserAuthController extends Controller
         });
     }
 
-    public function ShowLoginForm()
-    {
-        return view('user.auth.login');
-    }
-
     public function LoginProcess()
     {
         $input = request()->all();
@@ -105,19 +100,35 @@ class UserAuthController extends Controller
             'password.required' => '請填寫密碼',
         ]);
 
-        if ($validator->fails()) {
-            return redirect('user/auth/login')
-            ->withErrors($validator)
-            ->withInput();
+        // 驗證失敗或登入失敗時
+        if ($validator->fails() or !Auth::attempt(['account' => $input['account'], 'password' => $input['password']])) {
+        // 將錯誤訊息存入 Session
+        $errors = $validator->fails() 
+        ? $validator->errors() 
+        : collect(['msg' => '登入失敗，帳號或密碼錯誤！']);
+    
+        return back()
+            ->withErrors($errors)
+            ->withInput()
+            ->with('show_modal', '#user-sign_in'); // 觸發前端 Modal
         }
+    
+        // 登入成功
+        return redirect()->intended('user/auth/dashboard');
 
-        if (Auth::attempt(['account' => $input['account'], 'password' => $input['password']])) {
-            return redirect()->intended('user/auth/dashboard');
-        } else {
-            return redirect('user/auth/login')
-            ->withErrors(['msg' => '登入失敗，帳號或密碼錯誤！'])
-            ->withInput();
-        }
+        //if ($validator->fails()) {
+        //    return redirect('/#user-sign_in')
+        //    ->withErrors($validator)
+        //    ->withInput();
+        //}
+//
+        //if (Auth::attempt(['account' => $input['account'], 'password' => $input['password']])) {
+        //    return redirect()->intended('user/auth/dashboard');
+        //} else {
+        //    return redirect('/#user-sign_in')
+        //    ->withErrors(['msg' => '登入失敗，帳號或密碼錯誤！'])
+        //    ->withInput();
+        //}
     }
 
     public function Dashboard()
@@ -128,6 +139,6 @@ class UserAuthController extends Controller
     public function Logout()
     {
         Auth::logout();
-        return redirect()->route('ShowLoginForm');
+        return redirect()->route('indexPage');
     }
 }
