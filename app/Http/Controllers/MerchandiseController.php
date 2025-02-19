@@ -35,26 +35,17 @@ class MerchandiseController extends Controller
             return redirect('/');
         } else {
             $merchandise = $merchandise->first();
+            $binding = [
+                'title' => '編輯商品',
+                'merchandise' => $merchandise,
+            ];
+            return view('merchandise.edit', $binding);
         }
-
-        $binding = [
-            'title' => '編輯商品',
-            'merchandise' => $merchandise,
-        ];
-
-        return view('merchandise.edit', $binding);
     }
 
     public function MerchandiseItemEditProcess($merchandise_id)
     {
-        $merchandise = Merchandise::find($merchandise_id);
-
-        if (is_null($merchandise)) {
-            return redirect('/');
-        }
-
         $input = request()->all();
-
         $rules = [
             'status' => ['required', 'in:C,S'],
             'name' => ['required', 'max:80'],
@@ -64,49 +55,62 @@ class MerchandiseController extends Controller
             'remain_count' => ['required', 'integer', 'min:0'],
         ];
 
-        $validator = Validator::make($input, $rules);
+        unset($input['_token']);
 
-        if ($validator->fails()) {
-            return redirect('/merchandise/' . $merchandise_id . '/edit')
-                ->withErrors($validator)
-                ->withInput();
-        }
+        Merchandise::where('id', $merchandise_id)
+            ->update($input);
 
         if (isset($input['photo'])) {
+            // 上傳圖片
             $photo = $input['photo'];
+            // 檔案副檔名
             $file_extension = $photo->getClientOriginalExtension();
-            $file_name = uniqid() . '.' . $file_extension;
-            $file_relative_path = 'images/merchandise/' . $file_name;
+            // 檔案名稱
+            $file_name = 'item' . $merchandise_id . '.' . $file_extension;
+            // 檔案相對位置
+            $file_relative_path = 'images/merchandise/';
+            // 檔案存放位置
             $file_path = public_path($file_relative_path);
-            $file_url = asset($file_relative_path);
+            // 搬移檔案
+            $photo->move($file_path, $file_name);
+            // 設定圖片檔案名稱
+            $photo = $file_relative_path . $file_name;
 
-            $photo->move('images/merchandise/', $file_name);
-
-            $merchandise->photo = $file_url;
+            Merchandise::where('id', $merchandise_id)
+            ->update([
+                'photo' => $photo,
+            ]);
         }
-
-        $merchandise->status = $input['status'];
-        $merchandise->name = $input['name'];
-        $merchandise->introduction = $input['introduction'];
-        $merchandise->price = $input['price'];
-        $merchandise->remain_count = $input['remain_count'];
-
-        $merchandise->save();
 
         return redirect('/merchandise/' . $merchandise_id . '/edit');
     }
 
-    public function index(): View
+    public function MerchandiseManagePage()
     {
-        $item = Merchandise::paginate(5);
-
-        return view('index', [
-            'Merchandises' => $item,
-        ]);
+        $merchandise = Merchandise::get();
+        $binding = [
+            'title' => '管理商品',
+            'merchandises' => $merchandise,
+        ];
+        return view('merchandise.manage', $binding);
     }
 
-    public function MerchandiseListPage(): View
+    public function ItemPage($merchandise_id)
     {
-        return view('merchandise');
+        $merchandise = Merchandise::where('id', $merchandise_id)->first();
+
+        $binding = [
+            'name' => $merchandise->name,
+            'photo' => $merchandise->photo,
+            'introduction' => $merchandise->introduction,
+            'price' => $merchandise->price,
+            'remain_count' => $merchandise->remain_count,
+        ];
+        return view('merchandise.item', $binding);
+    }
+
+    public function CartPage($merchandise_id)
+    {
+        return view('shopping-cart.buy');
     }
 }

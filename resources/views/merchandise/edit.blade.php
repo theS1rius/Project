@@ -3,39 +3,23 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- logo -->
-        <link rel="icon" href="{{ asset('images/favicon.ico') }}">
-        <!-- css -->
-        <link rel="stylesheet" href="{{ asset('bootstrap-5.3.3/css/bootstrap.min.css')}}">
-        <link rel="stylesheet" href="{{ asset('fonts/icons-1.11.3/font/bootstrap-icons.css')}}">
-        <!-- 頁面動態 -->
-        <link rel="stylesheet" href="{{ asset('js/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css')}}">
-        <link rel="stylesheet" href="{{ asset('js/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css')}}">
-        <!-- 自己的 -->
-        <link rel="stylesheet" href="{{ asset('css/style.css')}}">
-        <link rel="stylesheet" href="{{ asset('css/media.css')}}">
+        @include('layouts.head')
 
         <title>官網 | 編輯商品</title>
     </head>
     <body>
         @include('layouts.header')
         <main>
-            <form action="/merchandise/{{ $merchandise->id }}/edit" method="post" enctype="multipart/form-data">
+            <form action="{{ route('MerchandiseItemEditProcess', ['merchandise_id' => $merchandise->id]) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="type">狀態</label>
-                    <select class="form-control"
-                        name="status"
-                        id="status">
-                        <option value="C"
-                            @if(old('status', $merchandise->status)=='C') selected @endif
-                            >
-                            建立中
+                    <select class="form-control" name="status" id="status">
+                        <option value="C" @if(old('status', $merchandise->status)=='C') selected @endif>
+                            未上架
                         </option>
-                        <option value="S"
-                            @if(old('status', $merchandise->status)=='S') selected @endif
-                            >
-                            銷售中
+                        <option value="S" @if(old('status', $merchandise->status)=='S') selected @endif>
+                            販售中
                         </option>
                     </select>
                 </div>
@@ -61,7 +45,7 @@
                         class="form-control"
                         id="photo"
                         name="photo">
-                    <img src="{{ $merchandise->photo or '/assets/images/default-merchandise.png' }}" />
+                    <img src="/{{ $merchandise->photo }}" />
                 </div>
             
                 <div class="form-group">
@@ -83,6 +67,8 @@
                 <button type="submit" class="btn btn-default">更新</button>
             </form>
         </main>
+        @include('layouts.loginform')
         @include('layouts.footer')
+        @include('layouts.script')
     </body>
 </html>

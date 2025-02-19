@@ -289,7 +289,7 @@ h1, img {
     align-items: center;
 }
 
-#for-search {
+#for-search{
     width: 0; /* 預設寬度為 0，隱藏 */
     opacity: 0; /* 透明度設為 0 */
     padding: 0;
@@ -305,4 +305,51 @@ h1, img {
     border: 1px solid #ccc; /* 增加邊框讓使用者感覺輸入框出現 */
     background: white; /* 讓輸入框明顯 */
     outline: none;
+}
+.createproduct{
+    margin-bottom: 0;
+}
+.form-select {
+    width: 100%;
+}
+#formse{
+    border: 2px solid #202020;
+}
+.PIT{
+    max-height: 40rem;
+}
+/* footer字體 */
+#contact{
+    font-size: .875rem;
+}
+
+.fs-14{
+    font-size: .875rem;
+}
+
+/* 背景mp4圖 */
+
+.bg-video {
+    position: fixed;     /* 固定在畫面 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* 影片裁切，填滿整個螢幕 */
+    z-index: -1;         /* 放在所有內容後面 */
+    overflow: hidden; /* 這樣容器內部溢出的部分會隱藏 */
+  }
+
+  /* edit裡面的卡片大小 */
+  .custom-container{
+    max-width: 850px;
+  }
+ 
+  /* .card-hight{
+    max-height: 100px;
+    object-fit: cover;
+  } */
+
+.img-box {
+    height: 380px;
 }

@@ -15,16 +15,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
                     <li class="nav-item ">
-                        <a class="nav-link active" href="{{ route('indexPage') }}#sale" title="前往 現在優惠">現在優惠</a>
+                        <a class="nav-link active" href="#sale" title="前往 現在優惠">現在優惠</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('indexPage') }}#hot-product" title="前往 熱門商品">熱門商品</a>
+                        <a class="nav-link active" href="#hot-product" title="前往 熱門商品">熱門商品</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('indexPage') }}#new-products" title="前往 最新商品">最新商品</a>
+                        <a class="nav-link active" href="#new-products" title="前往 最新商品">最新商品</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('indexPage') }}#products-list" title="前往 商品列表">商品列表</a>
+                        <a class="nav-link active" href="#products-list" title="前往 商品列表">商品列表</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="#contact" title="前往 聯絡資訊">聯絡資訊</a>
@@ -36,7 +36,7 @@
                 <!-- 登入/註冊 -->
                 @if (Auth::check())
                     <div class="user-sign_in me-4">
-                        <span style="color: aliceblue">@php echo "您好！ " . Auth::user()->name . " 會員"; @endphp</span>
+                        <span style="color: aliceblue">@php echo Auth::user()->name . " 您好！"; @endphp</span>
                         <a href="{{ route('Logout') }}" title="登出">
                             <i class="bi bi-person text-plum"></i>
                             <span class="text-plum">登出</span>

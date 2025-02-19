@@ -6,6 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
                 <!-- 登入 -->
+                <div class="modal-body">
                 <form action=" {{ route('LoginProcess') }}" method="POST" title="前往登入/註冊頁面">
                     {{ csrf_field() }}
                     <div class="mb-2">
@@ -38,13 +39,12 @@
                         <button class="btn btn-primary w-100" type="submit">登入</button>
                     </div>
                 </form>
-                
                 <div class="col-12 text-center mb-2">
-                <form action=" {{ route('ShowRegisterForm') }}" method="GET" target="_blank" title="前往註冊[另開新視窗]" data-bs-toggle="modal" data-bs-target="#sign-up">
-                    <button class="btn btn-dark w-100" type="submit">註冊</button>
-                </form>
-            </div>
-
+                    <form action=" {{ route('ShowRegisterForm') }}" method="GET" target="_blank" title="前往註冊[另開新視窗]" data-bs-toggle="modal" data-bs-target="#sign-up">
+                        <button class="btn btn-dark w-100" type="submit">註冊</button>
+                    </form>
+                </div>
+                </div>
             <div class="text-center fs-6 mb-1 p-2 text-pink">
                 <span class="small">使用其他帳號登入</span>
             </div>

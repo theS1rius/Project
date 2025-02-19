@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 
+use function Laravel\Prompts\alert;
+
 class UserAuthController extends Controller
 {
     public function ShowRegisterForm()
@@ -72,7 +74,9 @@ class UserAuthController extends Controller
             $this->SendRegisterMail($input);
         }
 
-        return redirect('user/auth/login');
+        alert('註冊成功！');
+
+        return redirect('/');
     }
 
     public function SendRegisterMail($input){

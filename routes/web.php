@@ -1,12 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\AuthUserAdminMiddleware;
 use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\MerchandiseController;
 use App\Http\Controllers\TransactionController;
+use Illuminate\Container\Attributes\Auth;
 use Ycs77\NewebPay\Facades\NewebPay;
 
 #到首頁
@@ -32,13 +34,12 @@ Route::group(['prefix' => 'merchandise'], function () {
     Route::get('/', [MerchandiseController::class, 'MerchandiseListPage'])->name('MerchandiseListPage');
     Route::post('/',function(){ return view('merchandise'); });
     Route::get('/create', [MerchandiseController::class, 'MerchandiseCreateProcess'])->name('MerchandiseCreateProcess');
-    Route::get('/manage', [MerchandiseController::class, 'MerchandiseManageListPage'])->name('MerchandiseManageListPage');
+    Route::get('/manage', [MerchandiseController::class, 'MerchandiseManagePage'])->name('MerchandiseManagePage');
     Route::group(['prefix' => '{merchandise_id}'], function () {
         Route::get('/', [MerchandiseController::class, 'MerchandiseItemPage'])->name('MerchandiseItemPage');
         Route::get('/edit', [MerchandiseController::class, 'MerchandiseItemEditPage'])->name('MerchandiseItemEditPage');
-        Route::put('/', [MerchandiseController::class, 'MerchandiseItemUpdateProcess'])->name('MerchandiseItemUpdateProcess');
-        Route::delete('/', [MerchandiseController::class, 'MerchandiseItemDeleteProcess'])->name('MerchandiseItemDeleteProcess');
-        Route::post('/buy', [MerchandiseController::class, 'MerchandiseItemBuyProcess'])->name('MerchandiseItemBuyProcess');
+        Route::post('/edit', [MerchandiseController::class, 'MerchandiseItemEditProcess'])->name('MerchandiseItemEditProcess');
+        Route::get('/item', [MerchandiseController::class, 'ItemPage'])->name('ItemPage');
     });
 });
 
