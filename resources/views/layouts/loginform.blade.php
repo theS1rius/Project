@@ -51,7 +51,7 @@
             <!-- 社群登入 -->
             <div class="d-flex justify-content-center align-items-between">
                 <div class="ms-3 fs-2">
-                    <a href="#" target="_blank" title="前往google[另開新視窗]">
+                    <a href=" {{route('redirectToProvider')}}" target="_blank" title="前往google[另開新視窗]">
                         <span class="d-none">前往google註冊</span>
                         <i class="bi bi-google "></i>
                     </a>

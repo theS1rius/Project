@@ -73,7 +73,6 @@
         <!-- 現在優惠內容 -->
         <article id="sale" class="py-5">
             <!-- 區塊標題 -->
-            <div class="mt-3">
                 <div class="d-flex">
                     <p class="ms-5">
                         🥐
@@ -81,7 +80,6 @@
                     </p>
                     <i class="bi bi-arrow-right ms-2"></i>
                 </div>
-            </div>
             <!-- 折價卷圖 -->
             <div>
                 <div class="d-flex flex-column  justify-content-center align-items-center">
@@ -182,7 +180,7 @@
             </div>
         </article>
         <!-- 最新商品 -->
-        <article id="new-products py-5">
+        <article id="new-products" class="py-5">
             <!-- 區塊標題 -->
             <div class="container my-5">
                 <div class="text-center text-plum mb-6 mt-4">
@@ -222,7 +220,6 @@
             </div>
 
         </article>
-
         <!-- 商品列表 -->
         <article id="products-list" class="py-5">
             <div class="container my-5">
@@ -251,7 +248,6 @@
                 </div>
             </div>
         </article>
-
     </main>
         @include('layouts.loginform')
         @include('layouts.footer')

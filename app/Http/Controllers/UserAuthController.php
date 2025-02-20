@@ -74,8 +74,6 @@ class UserAuthController extends Controller
             $this->SendRegisterMail($input);
         }
 
-        alert('註冊成功！');
-
         return redirect('/');
     }
 

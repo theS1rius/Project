@@ -59,7 +59,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label">使用者類型</label>
-                                <select id="inputState" class="form-select">
+                                <select id="inputState" name='type' class="form-select">
                                     <option value="G" selected>一般用戶</option>
                                     <option value='A'>管理員</option>
                                 </select>

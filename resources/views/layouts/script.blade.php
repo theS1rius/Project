@@ -20,7 +20,8 @@
                 }
             }
         })
-        $('nav a').on('click', function (e) {
+
+        $('#navbarSupportedContent > a').on('click', function (e) {
             e.preventDefault();
             var target = $(this).attr('href');
             var targetOffset = $(target).offset().top - 110;
@@ -28,6 +29,7 @@
                 scrollTop: targetOffset
             }, 150);
         });
+
         var $input = $('#for-search');
         $input.on('focus', function () {
             $(this).css({
@@ -38,6 +40,7 @@
                 background: 'white'
             });
         });
+        
         $('.search-button .btn').on('click', function (e) {
             e.preventDefault();
             $input.css({
