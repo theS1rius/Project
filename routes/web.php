@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CheckoutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AuthUserAdminMiddleware;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use App\Http\Controllers\MerchandiseController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Container\Attributes\Auth;
 use Ycs77\NewebPay\Facades\NewebPay;
+
 
 #到首頁
 Route::get('/', [HomeController::class, 'indexPage'])->name('indexPage');
@@ -43,49 +45,53 @@ Route::group(['prefix' => 'merchandise'], function () {
     });
 });
 
+#購物車
+Route::get('/cart', [MerchandiseController::class, 'CartPage'])->name('CartPage');
+
+# ECPay API
+Route::post('/buy', [CheckoutController::class, 'sendOrder'])->name('sendOrder');
+
 #交易紀錄頁面
 Route::get('/transaction', [TransactionController::class, 'TransactionListPage'])->name('TransactionListPage');
 
-#金流API
-Route::group(['prefix' => 'buy'], function () {
-    Route::get('/', function(){
-        return view('buy');
-    });
+
+// #藍新金流API
+// Route::group(['prefix' => 'buy'], function () {
+//     Route::get('/', function(){
+//         return view('buy');
+//     });
     
-    Route::post('/',function(){
-        $no = 'Vanespl_ec_'.time();  // 訂單編號
-        $amt = 120;                  // 交易金額
-        $desc = '我的商品';           // 商品名稱
-        $email = 'test@example.com'; // 付款人信箱
+//     Route::post('/',function(){
+//         $no = 'Vanespl_ec_'.time();  // 訂單編號
+//         $amt = 120;                  // 交易金額
+//         $desc = '我的商品';           // 商品名稱
+//         $email = 'test@example.com'; // 付款人信箱
 
-        return NewebPay::payment($no, $amt, $desc, $email)
-        ->tradeLimit() // 交易秒數限制
-        ->expireDate() // 交易截止日
-        ->returnUrl('https://siriuslab.website/merchandise') // 由藍新回傳後前景畫面要接收資料顯示的網址
-        ->notifyUrl('https://siriuslab.website/merchandise') // 由藍新回傳後背景處理資料的接收網址
-        ->customerUrl() // 商店取號網址
-        ->clientBackUrl() // 付款時點擊「返回按鈕」的網址
-        ->emailModify() // 是否開放 email 修改
-        ->loginType() // 是否需要登入藍新金流會員
-        ->orderComment() // 商店備註
-        ->paymentMethods() // 付款方式 *依照 config 格式傳送*
-        ->CVSCOM() // 物流方式
-        ->lgsType() // 物流型態
-        ->submit();
-    });
+//         return NewebPay::payment($no, $amt, $desc, $email)
+//         ->tradeLimit() // 交易秒數限制
+//         ->expireDate() // 交易截止日
+//         ->returnUrl('https://siriuslab.website/merchandise') // 由藍新回傳後前景畫面要接收資料顯示的網址
+//         ->notifyUrl('https://siriuslab.website/merchandise') // 由藍新回傳後背景處理資料的接收網址
+//         ->customerUrl() // 商店取號網址
+//         ->clientBackUrl() // 付款時點擊「返回按鈕」的網址
+//         ->emailModify() // 是否開放 email 修改
+//         ->loginType() // 是否需要登入藍新金流會員
+//         ->orderComment() // 商店備註
+//         ->paymentMethods() // 付款方式 *依照 config 格式傳送*
+//         ->CVSCOM() // 物流方式
+//         ->lgsType() // 物流型態
+//         ->submit();
+//     });
 
-    Route::post('/callback', function (Request $request) {
-        $result = NewebPay::result($request);
+//     Route::post('/callback', function (Request $request) {
+//         $result = NewebPay::result($request);
 
-        if ($result->isFail()) {
-            return redirect()->to('/buy')->with('error', $result->message());
-        }
+//         if ($result->isFail()) {
+//             return redirect()->to('/buy')->with('error', $result->message());
+//         }
 
-        // 訂單付款成功，處裡訂單邏輯...
+//         // 訂單付款成功，處裡訂單邏輯...
 
-        return redirect()->to('/buy')->with('success', '付款成功');
-    });
-});
-
-#購物車
-Route::post('/cart', [UserAuthController::class, 'Cart'])->name('Cart');
+//         return redirect()->to('/buy')->with('success', '付款成功');
+//     });
+// });

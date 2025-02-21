@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Shop\Entity\Merchandise;
-use Illuminate\View\View;
-use Illuminate\Support\Facades\Validator;
+use App\Shop\Entity\Cart;
+use Illuminate\Support\Facades\Auth;
 
 class MerchandiseController extends Controller
 {
@@ -100,6 +100,7 @@ class MerchandiseController extends Controller
         $merchandise = Merchandise::where('id', $merchandise_id)->first();
 
         $binding = [
+            'id' => $merchandise->id,
             'name' => $merchandise->name,
             'photo' => $merchandise->photo,
             'introduction' => $merchandise->introduction,
@@ -109,8 +110,36 @@ class MerchandiseController extends Controller
         return view('merchandise.item', $binding);
     }
 
-    public function CartPage($merchandise_id)
+    public function CartPage()
     {
-        return view('shopping-cart.buy');
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $input = request()->all();
+            if (isset($input['merchandise_id'])) {
+                $merchandise_id = $input['merchandise_id'];
+                $count = 1;
+                $merchandise = Merchandise::where('id', $merchandise_id)->first();
+                if ($merchandise) {
+                    $cart = Cart::where('user_id', $userId)
+                        ->where('merchandise_id', $merchandise_id)
+                        ->first();
+                    if ($cart) {
+                        $cart->count = $cart->count + $count;
+                        $cart->save();
+                    } else {
+                        Cart::create([
+                            'user_id' => $userId,
+                            'merchandise_id' => $merchandise_id,
+                            'count' => $count,
+                        ]);
+                    }
+                }
+            }
+
+            return view('cart');
+            
+        } else {
+            return redirect()->to('/');
+        }
     }
 }

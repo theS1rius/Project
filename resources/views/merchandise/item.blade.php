@@ -32,7 +32,7 @@
                 </nav>
                 <div class="row">
                     <div class="col">
-                        <img src="/{{ $photo }}" alt="商品圖片">
+                        <img src="/{{ $photo }}" alt="商品圖片" class="object-fit-cover img-papa">
                     </div>
                     <div class="col">
                         <h2>{{ $name }}</h2>
@@ -41,14 +41,14 @@
                             <p class="text-red">!!滿$3000即可宅配免運!!</p>
                             <span class="fs-3 text-red">${{ number_format($price * 0.8, 0) }}</span>
                             <span class="text-grey text-decoration-line-through">${{ $price }}</span>
-                            <h5 class="small">【尺寸】</h5>
-                            <p>M：肩寬62／胸圍63／袖長55／衣長69</p>
-                            <p>L：肩寬68／胸圍69／袖長58／衣長75</p>
-                        <div>
-                            <h5 class="small">【商品描述】</h5>
-                            <p>{{$introduction}}</p>
+                        <div class="small pt-3">
+                            <h5 class="fs-6 fw-bold">【商品詳情】</h5>
+                            <p class="ps-2">{{$introduction}}</p>
+                            <h5 class="fs-6 fw-bold">【尺寸】</h5>
+                            <p class="ps-2">M：肩寬62／胸圍63／袖長55／衣長69</p>
+                            <p class="ps-2">L：肩寬68／胸圍69／袖長58／衣長75</p>
                         </div>
-                            <h5 class="small">【數量】</h5>
+                            <h5 class="fs-6 fw-bold">【數量】</h5>
                             <div class="d-flex align-items-center col-6">
                                 <button class="btn plus-btn order-3 text-center  rounded-cirle btn-plum " type="button">
                                     <i class="bi bi-plus-lg "></i>
@@ -68,8 +68,8 @@
                             </div>
 
 
-                            <h5 class="small pt-3">【供應商】</h5>
-                            <p>LS韓國運貨</p>
+                            <h5 class="fs-6 fw-bold pt-3">【供應商】</h5>
+                            <p class="ps-2 small">LS韓國運貨</p>
                         </div>
                         <hr>
                         <div>
@@ -79,7 +79,7 @@
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
                                         aria-controls="panelsStayOpen-collapseTwo">
-                                        📦 免運費服務說明
+                                        📦 免運費服務說明 ↴
                                     </button>
                                 </h2>
                                 <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
@@ -94,16 +94,18 @@
                                 </div>
                             </div>
                             <!-- 立即購買、加入購物車 -->
-                            <div class="mt-3 col-4 btt d-flex ">
-                                <a href="MY-shopping1.html">
-                                    <button class="btn bg-plum-Brown me-1  " type="button" href:="MY-shopping1.html">
-                                        <span class="text-light">加入購物車</span>
+                            <div class="mt-3 col-4 btt d-flex mb-2">
+                                <form action="{{ route('CartPage') }}" method="GET">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="merchandise_id" value="{{ $id }}">
+                                    <button class="btn bg-plum-Brown me-1  " type="submit">
+                                        <span class="text-dark">加入購物車</span>
                                     </button>
-                                </a>
+                                </form>
                                 <form action="/buy" method="POST">
                                     {{ csrf_field() }}
-                                    <button class="btn bg-plum-Brown ms-1 " type="submit"> ">
-                                        <span class=" text-light">立即購買</span>
+                                    <button class="btn bg-plum-Brown me-1 " type="submit ">
+                                        <span class=" text-dark">立即購買</span>
                                     </button>
                                 </form>
                             </div>

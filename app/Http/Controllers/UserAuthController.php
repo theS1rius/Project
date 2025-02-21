@@ -116,26 +116,7 @@ class UserAuthController extends Controller
         }
     
         // 登入成功
-        return redirect()->intended('user/auth/dashboard');
-
-        //if ($validator->fails()) {
-        //    return redirect('/#user-sign_in')
-        //    ->withErrors($validator)
-        //    ->withInput();
-        //}
-//
-        //if (Auth::attempt(['account' => $input['account'], 'password' => $input['password']])) {
-        //    return redirect()->intended('user/auth/dashboard');
-        //} else {
-        //    return redirect('/#user-sign_in')
-        //    ->withErrors(['msg' => '登入失敗，帳號或密碼錯誤！'])
-        //    ->withInput();
-        //}
-    }
-
-    public function Dashboard()
-    {
-        return view('user.auth.dashboard', ['user' => Auth::user()]);
+        return redirect()->route('indexPage');
     }
 
     public function Logout()

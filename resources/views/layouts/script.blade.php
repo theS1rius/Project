@@ -21,7 +21,7 @@
             }
         })
 
-        $('#navbarSupportedContent > a').on('click', function (e) {
+        $('#navbarSupportedContent a').on('click', function (e) {
             e.preventDefault();
             var target = $(this).attr('href');
             var targetOffset = $(target).offset().top - 110;
@@ -52,7 +52,7 @@
             });
             $input.val('').blur();
         });
-    </script>
+</script>
 
 
 

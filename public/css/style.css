@@ -317,6 +317,11 @@ h1, img {
 }
 .PIT{
     max-height: 40rem;
+    box-shadow: 5px 0 10px;
+}
+#product-edit.row>*{
+    padding-right: 0;
+    padding-left: 0;
 }
 /* footer字體 */
 #contact{
@@ -352,4 +357,7 @@ h1, img {
 
 .img-box {
     height: 380px;
+}
+.img-papa{
+    height: 800px;
 }

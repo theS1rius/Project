@@ -11,17 +11,17 @@
         @include('layouts.header') 
         <!-- 圖 -->
         <article>
-        <div id="carouselExampleCaptions" class="carousel slide">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
-                    aria-label="Slide 4"></button>
-            </div>
+            <div id="carouselExampleCaptions" class="carousel slide">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
+                        aria-label="Slide 4"></button>
+                </div>
             <div class="carousel-inner">
                 <!-- banner1 -->
                 <div class="carousel-item active">
@@ -67,9 +67,9 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">下一個</span>
             </button>
-        </div>
-    </article>
-    <main>
+            </div>
+        </article>
+        <main>
         <!-- 現在優惠內容 -->
         <article id="sale" class="py-5">
             <!-- 區塊標題 -->
@@ -248,7 +248,7 @@
                 </div>
             </div>
         </article>
-    </main>
+        </main>
         @include('layouts.loginform')
         @include('layouts.footer')
         @include('layouts.script')
