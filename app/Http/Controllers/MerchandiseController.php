@@ -136,8 +136,21 @@ class MerchandiseController extends Controller
                 }
             }
 
-            return view('cart');
-            
+            $carts = Cart::where('user_id', $userId)->get();
+            $user_merchandise_id = [];
+            foreach ($carts as $cart) {
+                $user_merchandise_id[] = $cart->merchandise_id;
+            }
+            $merchandiseArray = [];
+            foreach ($user_merchandise_id as $usermerchandiseID) {
+                $merchandiseArray[] = Merchandise::where('id', $usermerchandiseID)->first();
+            }
+            $binding = [
+                'userCart' => $merchandiseArray,
+            ];
+
+            return view('cart', $binding);
+
         } else {
             return redirect()->to('/');
         }

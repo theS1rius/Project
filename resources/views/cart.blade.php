@@ -28,7 +28,7 @@
 
                                 </div>
                                 <div class="text-left ps-4 pb-2">
-                                    <span>登入/註冊以新增地址(或)查看已保存地址.</span>
+                                    <span>登入/註冊以新增地址(或)查看已保存地址。</span>
                                 </div>
                             </button>
 
@@ -42,20 +42,21 @@
                                     <p class="fw-bold mb-0">海外LS官方網站</p>
                                 </div>
                                 <button class="bg-transparent border-0 d-inline-flex ps-4 pb-2 ">
-                                    <span>登入/註冊以新增地址(或)查看已保存地址.</span>
+                                    <span>登入/註冊以新增地址(或)查看已保存地址。</span>
                                 </button>
                             </div>
                             <!-- 商品區 -->
+                            @foreach ($userCart as $usermerchandise)
                             <div class=" d-flex flex-column  g-x-2">
                                 <div class="card mb-3 ms-2 w-100">
                                     <div class="row g-0">
                                         <div class="col-md-4">
-                                            <img src="images/Popular items1.jpg" class="img-fluid rounded-start"
+                                            <img src="{{ $usermerchandise->photo}}" class="img-fluid rounded-start"
                                                 alt="...">
                                         </div>
                                         <div class="col-md-8">
                                             <div class="card-body fm">
-                                                <h5 class="card-title">簡約復古燈芯絲長袖上衣</h5>
+                                                <h5 class="card-title">{{ $usermerchandise->name}}</h5>
                                                 <div class="d-flex row">
                                                     <div class="col">
                                                         <td colspan="align-middle">
@@ -66,7 +67,6 @@
                                                                 <!-- <option selected>請選擇</option> -->
                                                                 <option value="1" selected>M</option>
                                                                 <option value="2">L</option>
-
                                                             </select>
                                                         </td>
                                                     </div>
@@ -80,13 +80,12 @@
                                                                 <option value="1" selected>1</option>
                                                                 <option value="2">2</option>
                                                                 <option value="3">3</option>
-
                                                             </select>
                                                         </td>
                                                     </div>
                                                 </div>
                                                 <div class="p-10">
-                                                    <p class="card-text fw-bold text-base text-right">$800</p>
+                                                    <p class="card-text fw-bold text-base text-right">${{ $usermerchandise->price}}</p>
                                                 </div>
                                             </div>
                                             <div
@@ -97,6 +96,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="col-4">
@@ -130,12 +130,22 @@
                                     <ul class="list-unstyled lh-lg">
                                         <li class=" border-bottom pb-2">送貨<div>來自海外</div>
                                         </li>
+                                        @foreach ($userCart as $usermerchandise)
+                                        @php $total[] = $usermerchandise->price
+                                        @endphp
+                                        @endforeach
                                         <div class="d-flex justify-content-between">
                                             <span class="totle-money">總額</span>
-                                            <span>800</span>
+                                            <span>{{ number_format(array_sum($total)) }}</span>
                                         </div>
                                     </ul>
-                                    <a href="#" class="btn btn-dark w-100">結帳</a>
+                                    <form action="{{ route('sendOrder')}}" method="post">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="total" value="{{ $total = array_sum($total) }}">
+                                        <button class="btn btn-dark w-100" type="submit">
+                                            結帳
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

@@ -11,6 +11,7 @@
         "laravel/socialite": "^5.18",
         "laravel/tinker": "^2.9",
         "tsaiyihua/laravel-ecpay": "^3.2",
+        "tsaiyihua/laravel-linepay": "^3.0",
         "ycs77/laravel-newebpay": "^1.0"
     },
     "require-dev": {

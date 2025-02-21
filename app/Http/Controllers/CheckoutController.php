@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use TsaiYiHua\ECPay\Checkout;
+use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
@@ -13,12 +14,14 @@ class CheckoutController extends Controller
 
     public function sendOrder()
     {
-        
+        $input = request()->all();
+        $UserId = Auth::id();
+
         $formData = [
-            'UserId' => 1, // 用戶ID , Optional
+            'UserId' => $UserId,
             'ItemDescription' => '產品簡介',
-            'ItemName' => '商品名稱',
-            'TotalAmount' => '2000',
+            'ItemName' => '產品名稱',
+            'TotalAmount' => $input['total'],
             'PaymentMethod' => 'Credit', // ALL, Credit, ATM, WebATM
         ];
         return $this->checkout->setPostData($formData)->send();

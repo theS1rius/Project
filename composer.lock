@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c7e2e5be375b93669b25c641d6bfcd08",
+    "content-hash": "bc593dd52066550c7c4cecba9bab66ba",
     "packages": [
         {
             "name": "brick/math",
@@ -6075,6 +6075,60 @@
                 "source": "https://github.com/tsaiyihua/laravel-ecpay/tree/3.2.1"
             },
             "time": "2024-07-19T08:27:40+00:00"
+        },
+        {
+            "name": "tsaiyihua/laravel-linepay",
+            "version": "3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tsaiyihua/laravel-linepay.git",
+                "reference": "ab2fd19b76851598c2c057fcdb85802c3a3258c2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tsaiyihua/laravel-linepay/zipball/ab2fd19b76851598c2c057fcdb85802c3a3258c2",
+                "reference": "ab2fd19b76851598c2c057fcdb85802c3a3258c2",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.5.5|^7.0.1",
+                "laravel/framework": "^6.20.1|^7.30.1|^8.75.0|^9.0|^10.0|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "TsaiYiHua\\LinePay\\LinePayServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TsaiYiHua\\LinePay\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yihua Tsai",
+                    "email": "tsaiyihua@gmail.com"
+                }
+            ],
+            "description": "linepay library for laravel",
+            "keywords": [
+                "laravel",
+                "line",
+                "linepay",
+                "payment"
+            ],
+            "support": {
+                "issues": "https://github.com/tsaiyihua/laravel-linepay/issues",
+                "source": "https://github.com/tsaiyihua/laravel-linepay/tree/3.0"
+            },
+            "time": "2024-11-12T09:25:15+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
