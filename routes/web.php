@@ -50,6 +50,7 @@ Route::get('/cart', [MerchandiseController::class, 'CartPage'])->name('CartPage'
 
 # ECPay API
 Route::post('/buy', [CheckoutController::class, 'sendOrder'])->name('sendOrder');
+Route::post('/buySingle', [CheckoutController::class, 'sendOrder_Single'])->name('sendOrder_Single');
 
 #交易紀錄頁面
 Route::get('/transaction', [TransactionController::class, 'TransactionListPage'])->name('TransactionListPage');

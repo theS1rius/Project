@@ -102,8 +102,10 @@
                                         <span class="text-dark">加入購物車</span>
                                     </button>
                                 </form>
-                                <form action="/buy" method="POST">
+                                <form action="{{ route('sendOrder_Single')}}" method="POST">
                                     {{ csrf_field() }}
+                                    @php $price = number_format($price * 0.8, 0) @endphp
+                                    <input type="hidden" name="price" value="{{ $price }}">
                                     <button class="btn bg-plum-Brown me-1 " type="submit ">
                                         <span class=" text-dark">立即購買</span>
                                     </button>
