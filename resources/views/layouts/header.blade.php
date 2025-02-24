@@ -52,7 +52,7 @@
                 @endif
                 <!-- 購物車 -->
                 <div class="cart-btn">
-                    <a href="#" title="前往 我的購物車" class="position-relative">
+                    <a href="{{ route('CartPage')}}" title="前往 我的購物車" class="position-relative">
                         <span class="text-plum p-1">購物車</span>
                     </a>
                 </div>

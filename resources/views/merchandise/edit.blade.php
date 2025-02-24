@@ -22,13 +22,13 @@
                         </div>
                         <div class="col-sm-6 d-flex  flex-column justify-content-center px-3">
                             <div class="p-3">
-                                <form action="{{ route('MerchandiseItemEditProcess', ['merchandise_id' => $merchandise->id]) }}" method="post">
+                                <form action="{{ route('MerchandiseItemEditProcess', ['merchandise_id' => $merchandise->id]) }}" method="post" enctype="multipart/form-data">
                                     {{ csrf_field() }}
                                     <!-- 建立 -->
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label py-2">狀態</label>
                                         <select class="form-select form-select-lg mb-3"
-                                            aria-label="Large select example" id="formse">
+                                            aria-label="Large select example" id="formse" name="status">
                                             <option value="C" @if(old('status', $merchandise->status)=='C') selected @endif>
                                                 未上架
                                             </option>
@@ -40,27 +40,27 @@
                                     <!-- 中文名稱 -->
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label">中文名稱</label>
-                                        <input type="text" class="form-control" id="chinese-name" value="{{ old('name', $merchandise->name) }}">
+                                        <input type="text" name="name" class="form-control" id="chinese-name" value="{{ old('name', $merchandise->name) }}">
                                     </div>
                                     <!-- 商品介紹 -->
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label">商品介紹</label>
-                                        <input type="text" class="form-control" id="product-name" value="{{ old('name', $merchandise->introduction) }}">
+                                        <input type="text" name="introduction" class="form-control" id="product-name" value="{{ old('name', $merchandise->introduction) }}">
                                     </div>
                                     <!-- 上傳檔案 -->
                                     <div class="mb-3">
                                         <label for="formFile" class="form-label">上傳圖片</label>
-                                        <input class="form-control" type="file" id="formFile" value="{{ old('photo', $merchandise->photo) }}">
+                                        <input type="file" name="photo" class="form-control" id="formFile">
                                     </div>
                                     <!-- 商品價格 -->
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label">商品價格</label>
-                                        <input type="number" class="form-control" id="product-name" value="{{ old('price', $merchandise->price) }}">
+                                        <input type="number" name="price" class="form-control" id="product-name" value="{{ old('price', $merchandise->price) }}">
                                     </div>
                                     <!-- 庫存 -->
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label">庫存</label>
-                                        <input type="number" class="form-control" id="exampleInputPassword1" value="{{ old('remain_count', $merchandise->remain_count) }}">
+                                        <input type="number" name="remain_count" class="form-control" id="exampleInputPassword1" value="{{ old('remain_count', $merchandise->remain_count) }}">
                                     </div>
                                     <div class="py-2 d-flex justify-content-end align-items-center">
                                         <button type="submit" class="btn btn-dark "><span class="text-light">更新</span>
